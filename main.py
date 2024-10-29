@@ -1,6 +1,6 @@
 import sys
 
-# 文字コードの対応表
+# 文字コードの対応
 encodings = {
     "1": "shift_jis",
     "2": "iso2022_jp",
@@ -25,6 +25,8 @@ def display_menu():
     target_encoding = input("番号を入力: ")
 
     if source_encoding in encodings and target_encoding in encodings:
+        print(f"{encodings[source_encoding]} から {encodings[target_encoding]} に変換します。")
+        # 番号を文字コード名の対応から変換して返す
         return encodings[source_encoding], encodings[target_encoding]
     else:
         print("無効な選択です。プログラムを終了します。")
@@ -52,7 +54,7 @@ def encode_text_to_hex(text, encoding):
 # メイン処理
 def main():
     source_encoding, target_encoding = display_menu()
-    hex_input = input("\n変換したい16進数のバイト列を入力してください (例: 8d618fe38d4b91be): ")
+    hex_input = input("\n変換したい16進数のバイト列を入力してください。空白は入れず、Unicodeの場合「U+」は削除してください。: ")
 
     try:
         # 16進数の入力をデコードしてUnicode文字列に変換
